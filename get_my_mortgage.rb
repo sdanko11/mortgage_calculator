@@ -8,11 +8,18 @@ puts 'What is the address of the home you want to get insurence information for?
 address = gets.chomp
 
 house = HomePurchaseOption.new(homes, address)
-house.display_address
-house.required_mortgage
-house.pmi_required?
 
-puts "How many years do you want for your insurence quote?"
-quote =gets.chomp.to_i
+if house.check_for_adress(address)
+  house.display_address
+  house.required_mortgage
+  house.pmi_required?
 
-house.insurance_cost(quote)
+  puts "Do you want a quote on your insurence?"
+  answer =gets.chomp
+
+    if answer.downcase == 'yes'
+      puts 'How many years'
+      years = gets.chomp.to_i
+      house.insurance_cost(years)
+    end
+end

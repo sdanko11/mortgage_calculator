@@ -1,3 +1,5 @@
+require 'pry'
+
 class HomePurchaseOption
 
   attr_reader :possible_homes
@@ -5,6 +7,14 @@ class HomePurchaseOption
   def initialize(house_data, home_adress)
     @possible_homes = house_data
     @home_adress = home_adress
+  end
+
+  def check_for_adress(adress)
+    adresses = []
+    @possible_homes.homes.each do |house|
+      adresses << house[:adress]
+    end
+    adresses.include?(adress)
   end
 
   def display_address
